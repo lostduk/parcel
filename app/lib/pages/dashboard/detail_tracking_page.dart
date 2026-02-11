@@ -50,7 +50,7 @@ class DetailTrackingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(tracking.number),
+        title: Text(tracking.displayName ?? tracking.number),
         actions: [
           IconButton(
             icon: Icon(Icons.delete, color: Colors.red),
@@ -83,6 +83,17 @@ class DetailTrackingPage extends StatelessWidget {
             buildBox("Events", [
               Text("Failed to fetch information!"),
             ]),
+            if (tracking.lockerId != null && tracking.lockerId!.isNotEmpty)
+              buildBox("Locker", [
+                buildRow("ID", tracking.lockerId),
+                SizedBox(height: 15),
+                Center(child: ElevatedButton(
+                  onPressed: () {
+
+                  },
+                  child: Text("Unlock"),
+                )),
+              ])
           ],
         ),
       ),

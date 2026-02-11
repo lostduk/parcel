@@ -11,22 +11,36 @@ class DashboardHomePage extends StatelessWidget {
   /* fake data */
   final List<Tracking> trackingList = [
     Tracking(
-      number: "RR123465789CN",
+      displayName: "นมอัดเม็ด",
+      number: "TH07018BR0VH4F",
       carrier: "Flash",
       shipperAddress: {
-        "country": "CN",
-        "city": "SHENZHEN",
+        "country": "TH",
+        "city": "Phra Nakhon Sri Ayutthaya",
       },
       recipientAddress: {
-        "country": "AF",
-        "city": "KABUl",
+        "country": "TH",
+        "city": "Lopburi",
+        "state": "Lopburi",
+        "postal_code": "15000",
       },
-      events: [
-        {
-          "description": "Package receiveed at facility",
-          "time_utc": "2023-08-14T05:00:00Z",
-        }
-      ],
+    ),
+    Tracking(
+      displayName: "ดอกกุหลาบ",
+      number: "829206130782",
+      carrier: "J&T",
+      lockerId: "01",
+      shipperAddress: {
+        "country": "TH",
+        "city": "Nonthaburi",
+        "state": "Bang Yai",
+      },
+      recipientAddress: {
+        "country": "TH",
+        "city": "Lopburi",
+        "state": "Lopburi",
+        "postal_code": "15000",
+      },
     ),
   ];
 
@@ -38,11 +52,22 @@ class DashboardHomePage extends StatelessWidget {
         itemBuilder: (context, index) {
           final tracking = trackingList[index];
 
+          final shipperCountry = tracking.shipperAddress?["country"] as String?;
+          final shipperCity = tracking.shipperAddress?["city"] as String?;
+          final recipientCountry = tracking.recipientAddress?["country"] as String?;
+          final recipientCity = tracking.recipientAddress?["city"] as String?;
+
           return Card(
             margin: EdgeInsets.all(10),
             child: ListTile(
-              title: Text(tracking.number),
-              subtitle: Text("Fuck"),
+              title: Text(tracking.displayName ?? tracking.number),
+              subtitle: Text(
+                "${shipperCountry?.isNotEmpty == true ? "$shipperCountry, " : ""}"
+                "${shipperCity?.isNotEmpty == true ? shipperCity : ""}"
+                " -> "
+                "${recipientCountry?.isNotEmpty == true ? "$recipientCountry, " : ""}"
+                "${recipientCity?.isNotEmpty == true ? recipientCity : ""}",
+              ),
               trailing: Icon(Icons.arrow_forward_ios),
               onTap: () {
                 Navigator.push(

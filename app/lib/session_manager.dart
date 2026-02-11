@@ -9,4 +9,9 @@ class SessionManager {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_keyToken);
   }
+
+  static Future<void> setSession(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_keyToken, token);
+  }
 }

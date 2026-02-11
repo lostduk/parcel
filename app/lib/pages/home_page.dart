@@ -1,6 +1,8 @@
 /* imports */
 import 'package:flutter/material.dart';
 
+import 'signin_page.dart';
+
 /* classes */
 class HomePage extends StatelessWidget {
   @override
@@ -15,10 +17,13 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ElevatedButton(
-                onPressed: () => {},
+                onPressed: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => SigninPage()),
+                ),
                 child: Text("Signin"),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () => {},
                 child: Text("Config new Box"),

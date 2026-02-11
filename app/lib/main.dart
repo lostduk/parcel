@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'session_manager.dart';
 
 import 'pages/home_page.dart';
+import 'pages/dashboard_page.dart';
 
 /* main */
 void main() {
@@ -43,7 +44,10 @@ class _SplashScreenState extends State<SplashScreen> {
     String? token = await SessionManager.getSession();
 
     if (token != null) {
-      
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => DashboardPage()),
+      );
     } else {
       Navigator.pushReplacement(
         context,

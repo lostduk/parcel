@@ -14,4 +14,9 @@ class SessionManager {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_keyToken, token);
   }
+
+  static Future<void> clearSession() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_keyToken);
+  }
 }

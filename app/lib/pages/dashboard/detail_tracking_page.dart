@@ -89,7 +89,29 @@ class DetailTrackingPage extends StatelessWidget {
                 SizedBox(height: 15),
                 Center(child: ElevatedButton(
                   onPressed: () {
-
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text("Confirm Unlock Locker"),
+                        content: Text("Are you sure you want to unlock locker?"),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text("Cancel"),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                               SnackBar(content: Text("Locked Opened!")),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                            child: Text("Confirm"),
+                          ),
+                        ],
+                      ),
+                    );
                   },
                   child: Text("Unlock"),
                 )),
